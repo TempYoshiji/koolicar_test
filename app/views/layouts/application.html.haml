@@ -7,4 +7,12 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     .container
+      %br
+      - if flash.present?
+        - flash.each do |key, text|
+          %div.alert.alert-dismissible{ class: "alert-#{key}" }
+            %a.close{ href: '#', data: { dismiss: 'alert' } } &times;
+            = text
+        %br
+
       = yield

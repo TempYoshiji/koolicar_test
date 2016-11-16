@@ -1,0 +1,14 @@
+= display_resource_errors(@rental)
+
+= form_for @rental do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', placeholder: Rental.human_attribute_name(:name)
+
+  .form-group
+    = f.submit 'Save', class: 'btn btn-secondary'
+    = link_to rentals_path do
+      .btn.btn-secondary= 'Cancel'
+    - if @rental.persisted?
+      = link_to rental_path(@rental), method: :delete do
+        .btn.btn-secondary= 'Delete'
