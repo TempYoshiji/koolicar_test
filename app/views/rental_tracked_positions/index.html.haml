@@ -1,11 +1,16 @@
-.row
-  .col-md-9
-    %h1= "#{Rental.model_name.human} '#{@rental.name}': #{RentalTrackedPosition.model_name.human.pluralize}"
-  .col-md-3
-    = link_to edit_rental_path(@rental) do
-      .btn.btn-secondary= 'Back'
-    = link_to new_rental_rental_tracked_position_path(@rental) do
-      .btn.btn-secondary= 'New'
+%h1= "#{Rental.model_name.human} '#{@rental.name}': #{RentalTrackedPosition.model_name.human.pluralize}"
+
+.row{ style: 'text-align: center;' }
+  = link_to edit_rental_path(@rental) do
+    .btn.btn-secondary= 'Back'
+  = link_to new_rental_rental_tracked_position_path(@rental) do
+    .btn.btn-secondary= 'New tracked position'
+  = link_to import_csv_rental_rental_tracked_positions_path(@rental) do
+    .btn.btn-secondary= 'Import positions from CSV'
+  = link_to destroy_all_rental_rental_tracked_positions_path(@rental), method: :delete, data: { confirm: 'Are you sure?' } do
+    .btn.btn-secondary= 'Destroy all positions'
+  TODO compute total_distance traveled
+
 %table.table.table-hover.table-bordered
   %thead
     %tr

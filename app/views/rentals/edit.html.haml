@@ -2,7 +2,7 @@
   .col-md-9
     %h1= "#{Rental.model_name.human}: #{@rental.name}"
   .col-md-3
-    = link_to new_rental_rental_tracked_position_path(@rental) do
-      .btn.btn-secondary= 'New tracked position'
+    = link_to rental_rental_tracked_positions_path(@rental) do
+      .btn.btn-secondary= 'View tracked positions'
 
 = render 'form'

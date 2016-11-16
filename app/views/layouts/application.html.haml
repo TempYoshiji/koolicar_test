@@ -12,7 +12,7 @@
         - flash.each do |key, text|
           %div.alert.alert-dismissible{ class: "alert-#{key}" }
             %a.close{ href: '#', data: { dismiss: 'alert' } } &times;
-            = text
+            = Array.wrap(text).join('<br/>').html_safe
         %br
 
       = yield

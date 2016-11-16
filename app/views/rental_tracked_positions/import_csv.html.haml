@@ -1,0 +1,16 @@
+.row
+  .col-md-9
+    %h1= 'Import positions from CSV file'
+  .col-md-3
+    = link_to rental_rental_tracked_positions_path(@rental) do
+      .btn.btn-secondary= 'Back'
+
+= form_tag do_import_csv_rental_rental_tracked_positions_path(@rental), multipart: true do
+  .form-group
+    = label_tag 'csv_file', 'CSV file'
+    = file_field_tag 'csv_file', class: 'form-control'
+
+  .form-group
+    = submit_tag 'Send', class: 'btn btn-secondary'
+    = link_to rental_rental_tracked_positions_path(@rental) do
+      .btn.btn-secondary= 'Cancel'
