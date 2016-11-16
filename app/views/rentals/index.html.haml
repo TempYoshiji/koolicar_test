@@ -1,0 +1,12 @@
+%h1= Rental.model_name.human.pluralize
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th= Rental.human_attribute_name(:name)
+      %th
+  %tbody
+    - @rentals.each do |rental|
+      %tr
+        %td= rental.name
+        %td
