@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116153851) do
+ActiveRecord::Schema.define(version: 20161116205643) do
+
+  create_table "rental_tracked_positions", force: :cascade do |t|
+    t.datetime "tracked_at"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "rental_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rental_id"], name: "index_rental_tracked_positions_on_rental_id"
+  end
 
   create_table "rentals", force: :cascade do |t|
     t.string   "name"

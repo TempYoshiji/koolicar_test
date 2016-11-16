@@ -1,0 +1,28 @@
+.row
+  .col-md-9
+    %h1= "#{Rental.model_name.human} '#{@rental.name}': #{RentalTrackedPosition.model_name.human.pluralize}"
+  .col-md-3
+    = link_to edit_rental_path(@rental) do
+      .btn.btn-secondary= 'Back'
+    = link_to new_rental_rental_tracked_position_path(@rental) do
+      .btn.btn-secondary= 'New'
+%table.table.table-hover.table-bordered
+  %thead
+    %tr
+      %th= 'id'
+      %th{ style: 'width: 60%' }= RentalTrackedPosition.human_attribute_name(:tracked_at)
+      %th= RentalTrackedPosition.human_attribute_name(:latitude)
+      %th= RentalTrackedPosition.human_attribute_name(:longitude)
+      %th{ style: 'width: 20%' }= 'Actions'
+  %tbody
+    - @rental_tracked_positions.each do |rental_tracked_position|
+      %tr
+        %td= rental_tracked_position.id
+        %td= l(rental_tracked_position.tracked_at)
+        %td{ style: 'text-align: right;' }= rental_tracked_position.latitude
+        %td{ style: 'text-align: right;' }= rental_tracked_position.longitude
+        %td{ style: 'text-align: center;' }
+          = link_to edit_rental_rental_tracked_position_path(@rental, rental_tracked_position) do
+            .btn.btn-secondary= 'Edit'
+          = link_to rental_rental_tracked_position_path(@rental, rental_tracked_position), method: :delete, data: { confirm: 'Are you sure?' } do
+            .btn.btn-secondary= 'Delete'
