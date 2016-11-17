@@ -33,21 +33,27 @@ class RentalTrackedPositionCsvImporter
         begin
           attrs = { latitude: Float(row[1]), longitude: Float(row[2]) } # casting as Float like this will raise an error, whereas "wtf".to_f => 0.0
           attrs[:tracked_at] = Time.at(Integer(row[0])).to_datetime
+          attrs[:skip_compute_total_distance] = true # hook to avoid the useless n-1 calls where n = number of positions to create
           @rental.rental_tracked_positions.new(attrs)
         rescue => error
           raise error unless Rails.env.production? # should log the error if in production mode
         end
       end
-      @errors.push('Some data was not valid') unless @rental.save
+      unless @rental.save # triggers the creation of all the new RentalTrackedPosition records
+        @errors.push('Some data was not valid')
+      end
     end
   end
 
-  def try_import
+  def execute
     validate_can_import
     if @errors.present?
       return false
     else
       import_csv_content
+      @rental.reload # reloading to get rid off the invalid RentalTrackedPosition records
+      @rental.set_computed_total_distance # call to compute the total_distance with all the persisted RentalTrackedPosition records
+      @rental.save
     end
     @errors.blank?
   end

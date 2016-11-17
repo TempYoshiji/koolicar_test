@@ -10,7 +10,7 @@ class RentalTrackedPositionsController < ApplicationController
   def do_import_csv
     # I know I could have used the same `import_csv` action and handle the GET and POST requests, but it feels messy
     importer = RentalTrackedPositionCsvImporter.new(@rental, params[:csv_file])
-    importer.try_import
+    importer.execute
     if importer.errors.present?
       flash[:danger] = importer.errors
     else

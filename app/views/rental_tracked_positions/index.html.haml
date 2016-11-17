@@ -9,7 +9,11 @@
     .btn.btn-secondary= 'Import positions from CSV'
   = link_to destroy_all_rental_rental_tracked_positions_path(@rental), method: :delete, data: { confirm: 'Are you sure?' } do
     .btn.btn-secondary= 'Destroy all positions'
-  TODO compute total_distance traveled
+
+.row
+  Total distance:
+  = @rental.total_distance
+  km
 
 %table.table.table-hover.table-bordered
   %thead
