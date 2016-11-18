@@ -9,7 +9,7 @@ class RentalTrackedPosition < ApplicationRecord
   validates :tracked_at, presence: true
   validates :latitude, presence: true
   validates :longitude, presence: true
-  validates :tracked_at, uniqueness: { scope: [:rental_id] } # can't have two records for the same rental_id and tracked_at
+  validates :tracked_at, uniqueness: { scope: [:rental_id, :latitude, :longitude] } # avoid duplicates
   # FYI: your CSV file contains several records for the same timestamp
 
   after_save :compute_total_distance_after_save

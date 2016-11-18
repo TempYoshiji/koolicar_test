@@ -17,9 +17,8 @@ class RentalTrackedPositionCsvImporter
     begin
       @csv_parsed = CSV.read(@csv_uploaded_file.path, col_sep: ';') # usually the col_sep is a coma , but your CSV files used ; instead
     rescue => error
-      # could log the error *eventually*
-      @errors.push('CSV file is blank or not valid!')
-      @errors.push(error) unless Rails.env.production? # we don't want to show too much in production mode!
+      raise error unless Rails.env.production?
+      @errors.push('CSV file is empty or not valid!')
     end
   end
 
