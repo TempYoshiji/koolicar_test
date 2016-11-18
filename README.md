@@ -1,24 +1,15 @@
-# README
+# Important components
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Rails 5.0.0.1
+* Ruby 2.3.2
+* SQLite 3
+* HAML
+* Bootstrap
+* Geocoder
 
-Things you may want to cover:
+# Other things to know
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* did not use I18n because this is a very small app.
+* no specific error log created (importations, distance calculations, etc.)
+* no test suite
+* spent wednesday (all day), 2hrs on thursday, 1hr on friday to polish/finish this app.

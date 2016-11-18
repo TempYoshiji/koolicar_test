@@ -6,8 +6,11 @@ class Rental < ApplicationRecord
   validates :total_distance, numericality: { greater_than_or_equal_to: 0.0 }
 
   before_validation :set_total_distance_before_validation
+  # this is a habit I took: add the callback's name after the method's name.
+  # This becomes pretty useful when you have a model with quite a lot of methods defined
 
   def erase_all_tracked_positions
+    # specific method to destroy several positions but compute the total_distance only once
     transaction do
       self.rental_tracked_positions.each do |rtp|
         rtp.skip_compute_total_distance = true

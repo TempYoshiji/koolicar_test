@@ -1,4 +1,4 @@
-require 'rental_tracked_position_csv_importer' # Yes, I prefer to require instead of autoloading it
+require 'rental_tracked_position_csv_importer' # Yes, I prefer to require instead of autoloading it (Why would all the other files could access this Class?)
 
 class RentalTrackedPositionsController < ApplicationController
   before_action :set_rental

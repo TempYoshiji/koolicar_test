@@ -1,6 +1,5 @@
-# This class should probably be located at lib/importers/rental_tracked_position_importer.rb
+# This class could be located at lib/importers/rental_tracked_position_importer.rb
 # This folder lib/importers/* would contain Importer classes
-# But for the purpose of this exercise, I did not took the time to create this folder
 require 'csv'
 
 class RentalTrackedPositionCsvImporter
@@ -9,6 +8,7 @@ class RentalTrackedPositionCsvImporter
   def initialize(rental, csv_uploaded_file)
     @rental = rental
     @csv_uploaded_file = csv_uploaded_file
+    @csv_parsed = []
     @errors = []
   end
 
@@ -17,7 +17,7 @@ class RentalTrackedPositionCsvImporter
     begin
       @csv_parsed = CSV.read(@csv_uploaded_file.path, col_sep: ';') # usually the col_sep is a coma , but your CSV files used ; instead
     rescue => error
-      raise error unless Rails.env.production?
+      raise error unless Rails.env.production? # error should be logged into its specific Logger for production env.
       @errors.push('CSV file is empty or not valid!')
     end
   end
