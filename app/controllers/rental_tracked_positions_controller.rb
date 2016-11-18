@@ -56,7 +56,7 @@ class RentalTrackedPositionsController < ApplicationController
   end
 
   def destroy_all
-    @rental.rental_tracked_positions.destroy_all
+    @rental.erase_all_tracked_positions
     redirect_to rental_rental_tracked_positions_path(@rental), flash: { success: 'Successfully deleted all positions related to this rental' }
   end
 

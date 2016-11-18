@@ -12,11 +12,12 @@ class RentalTrackedPosition < ApplicationRecord
   validates :tracked_at, uniqueness: { scope: [:rental_id, :latitude, :longitude] } # avoid duplicates
   # FYI: your CSV file contains several records for the same timestamp
 
-  after_save :compute_total_distance_after_save
+  after_save :compute_total_distance
+  after_destroy :compute_total_distance
 
   protected
 
-  def compute_total_distance_after_save
+  def compute_total_distance
     return if @skip_compute_total_distance
     self.rental.set_computed_total_distance
     self.rental.save

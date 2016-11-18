@@ -11,7 +11,7 @@
       %th= 'id'
       %th{ style: 'width: 50%' }= Rental.human_attribute_name(:name)
       %th= 'Tracked positions count'
-      %th= Rental.human_attribute_name(:total_distance)
+      %th= 'Ttoal distance (km)'
       %th{ style: 'width: 20%' }= 'Actions'
   %tbody
     - @rentals.each do |rental|
@@ -19,7 +19,7 @@
         %td= rental.id
         %td= rental.name
         %td= rental.rental_tracked_positions.count
-        %td{ style: 'text-align: right;' }= rental.total_distance
+        %td{ style: 'text-align: right;' }= rental.total_distance.round(3)
         %td{ style: 'text-align: center;' }
           = link_to edit_rental_path(rental) do
             .btn.btn-secondary= 'Edit'

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'rentals#index'
   resources :rentals, except: :show do
     resources :rental_tracked_positions, except: :show do
       collection do

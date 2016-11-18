@@ -7,6 +7,17 @@ class Rental < ApplicationRecord
 
   before_validation :set_total_distance_before_validation
 
+  def erase_all_tracked_positions
+    transaction do
+      self.rental_tracked_positions.each do |rtp|
+        rtp.skip_compute_total_distance = true
+        rtp.destroy
+      end
+      self.set_computed_total_distance
+      self.save
+    end
+  end
+
   def set_computed_total_distance
     self.total_distance = compute_total_distance
   end
